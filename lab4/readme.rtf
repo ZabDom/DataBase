@@ -1,70 +1,63 @@
-{\rtf1\ansi\ansicpg1250\cocoartf1671\cocoasubrtf100
-{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
-{\colortbl;\red255\green255\blue255;}
-{\*\expandedcolortbl;;}
-\paperw11900\paperh16840\margl1440\margr1440\vieww12840\viewh6360\viewkind0
-\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+Laboratoria 4
 
-\f0\fs24 \cf0 Laboratoria 4\
-\
-JOIN\
-NATURAL JOIN\
-z.datarealizacji < NOW() - INTERVAL \'925 years\'92\
-\
-4.1.1\
-SELECT k.nazwa FROM klienci k;\
-\
--> wyswietla nazwy klientow\
-\
-4.1.2\
-SELECT k.nazwa, z.zamowienia FROM klienci k, zamowienia z;\
-\
--> wyswietli nazwy klientow i zamowienia\
-\
-4.1.3\
-SELECT k.nazwa, z.idzamowienia FROM klienci k, zamowienia z WHERE z.idklienta = k.idklienta;\
-\
--> wyswietla nazwy klientow i id ich zamowienia\
-\
-4.1.4\
-SELECT k.nazwa, z.idzamowienia FROM klienci k NATURAL JOIN zamowienia z;\
-\
--> wyswietla jw z uzyciem NATURAL JOIN\
-\
-4.1.5\
-SELECT k.nazwa, z.idzamowienia FROM klienci k JOIN zamowienia z ON z.idklienta = k.idklienta;\
-\
--> wyswietla jw z uzyciem JOIN\
-\
-4.1.6\
-SELECT k.nazwa, z.idzamowienia FROM klienci k JOIN zamowienia z USING (idklienta);\
-\
--> wyswietla jw z uzyciem JOIN i USING\
-\
-4.2.1\
-SELECT z.datarealizacji, z.idzamowienia FROM zamowienia z INNER JOIN klienci k ON k.idklienta = z.idklienta AND k.nazwa LIKE \'92%Antoni\'92;\
-\
--> wyswietla date realizacji i id zamowienia klienta ktory ma na imie Antoni\
-\
-4.2.2\
-SELECT z.datarealizacji, z.idzamowienia, k.ulica FROM zamowienia z INNER JOIN klienci k ON k.idklienta = z.idklienta AND k.ulica LIKE \'92%/%\'92;\
-\
--> wyswietla date realizacji, id zamowienia oraz ulice klienta ktory mieszka w mieszkaniu (bo ulica np. Boczna 23/91)\
-\
-4.2.3\
-SELECT z.datarealizacji, z.idzamowienia, k.miejscowosc FROM zamowienia z INNER JOIN klienci k ON k.idklienta = z.idklienta AND k.miejscowosc LIKE \'92Krak\'f3w\'92 AND EXTRACT(month FROM z.datarealizacji) = 11;\
-\
--> wyswietla datarealizacji, idzamowienia i miejscowosc gdzie klient jest z Krakowa i data realizacji to 2013-11\
-\
-4.3.1\
-SELECT k.nazwa, k.miejscowosc, k.ulica FROM klienci k INNER JOIN zamowienia z ON z.idklienta = k.idklienta AND (z.datarealizacji < NOW() - INTERVAL \'925 years\'92);\
-\
--> wyswietla nazwe, miejscowosc i ulice gdzie klienci zlozyli zamowienie nie dluzej niz 5 lat temu\
-\
-4.3.2\
-SELECT k.nazwa, k.miejscowosc, k.ulica FROM klienci k NATURAL JOIN zamowienia z NATURAL JOIN artykuly a JOIN  pudelka p USING (idpudelka) WHERE p.nazwa IN (\'92Kremowa fantazja\'92, \'92Kolekcja jesienna\'92);\
-\
--> wyswietla jw gdzie klienci zamowili czekoladki o konkretnej nazwie\
-\
-4.3.3\
-SELECT DISTINCT idklienta, nazwa, ulica, miejscowosc FROM klienci NATURAL JOIN zamowienia ORDER BY 1;}
+JOIN
+NATURAL JOIN
+z.datarealizacji < NOW() - INTERVAL ’5 years’
+
+4.1.1
+SELECT k.nazwa FROM klienci k;
+
+-> wyswietla nazwy klientow
+
+4.1.2
+SELECT k.nazwa, z.zamowienia FROM klienci k, zamowienia z;
+
+-> wyswietli nazwy klientow i zamowienia
+
+4.1.3
+SELECT k.nazwa, z.idzamowienia FROM klienci k, zamowienia z WHERE z.idklienta = k.idklienta;
+
+-> wyswietla nazwy klientow i id ich zamowienia
+
+4.1.4
+SELECT k.nazwa, z.idzamowienia FROM klienci k NATURAL JOIN zamowienia z;
+
+-> wyswietla jw z uzyciem NATURAL JOIN
+
+4.1.5
+SELECT k.nazwa, z.idzamowienia FROM klienci k JOIN zamowienia z ON z.idklienta = k.idklienta;
+
+-> wyswietla jw z uzyciem JOIN
+
+4.1.6
+SELECT k.nazwa, z.idzamowienia FROM klienci k JOIN zamowienia z USING (idklienta);
+
+-> wyswietla jw z uzyciem JOIN i USING
+
+4.2.1
+SELECT z.datarealizacji, z.idzamowienia FROM zamowienia z INNER JOIN klienci k ON k.idklienta = z.idklienta AND k.nazwa LIKE ’%Antoni’;
+
+-> wyswietla date realizacji i id zamowienia klienta ktory ma na imie Antoni
+
+4.2.2
+SELECT z.datarealizacji, z.idzamowienia, k.ulica FROM zamowienia z INNER JOIN klienci k ON k.idklienta = z.idklienta AND k.ulica LIKE ’%/%’;
+
+-> wyswietla date realizacji, id zamowienia oraz ulice klienta ktory mieszka w mieszkaniu (bo ulica np. Boczna 23/91)
+
+4.2.3
+SELECT z.datarealizacji, z.idzamowienia, k.miejscowosc FROM zamowienia z INNER JOIN klienci k ON k.idklienta = z.idklienta AND k.miejscowosc LIKE ’Kraków’ AND EXTRACT(month FROM z.datarealizacji) = 11;
+
+-> wyswietla datarealizacji, idzamowienia i miejscowosc gdzie klient jest z Krakowa i data realizacji to 2013-11
+
+4.3.1
+SELECT k.nazwa, k.miejscowosc, k.ulica FROM klienci k INNER JOIN zamowienia z ON z.idklienta = k.idklienta AND (z.datarealizacji < NOW() - INTERVAL ’5 years’);
+
+-> wyswietla nazwe, miejscowosc i ulice gdzie klienci zlozyli zamowienie nie dluzej niz 5 lat temu
+
+4.3.2
+SELECT k.nazwa, k.miejscowosc, k.ulica FROM klienci k NATURAL JOIN zamowienia z NATURAL JOIN artykuly a JOIN  pudelka p USING (idpudelka) WHERE p.nazwa IN (’Kremowa fantazja’, ’Kolekcja jesienna’);
+
+-> wyswietla jw gdzie klienci zamowili czekoladki o konkretnej nazwie
+
+4.3.3
+SELECT DISTINCT idklienta, nazwa, ulica, miejscowosc FROM klienci NATURAL JOIN zamowienia ORDER BY 1;
